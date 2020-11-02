@@ -1,0 +1,68 @@
+<html>
+<head>
+<script languague = "JavaScript">
+
+var answers = ["Of course!", "Definitely not.","Without a doubt!", "Nooooo way. Terrible idea.", "Most likely.", "IDK man, this one is up to you...", "Most definitely.","The odds are stacked against you.","100%! The odds are in your favor!", "This one is entirely up to you."]
+//Bad: Definitely not. Good: 100%! The odds are in your favor!
+
+function random()
+{
+
+	var rand = -1;
+	var userQ = document.getElementById("question");
+	var myAnswer = document.getElementById("answers");
+
+	rand = Math.random(); // math.random return a random decimal between 0 (inclusive) and 1 (exclusive)
+	
+	rand = rand * 10; //so that it's not a decimal
+	
+	//rand = rand - 1;
+	
+	rand = Math.floor(rand); //returns the nearest ineger that is less than the parameter
+	
+	//alert(answers[rand]);
+	
+	if(userQ.value.length == 0)
+	{
+		myAnswer.value = "You need to ask a question, silly!"
+	}
+	else
+	{
+		myAnswer.value = answers[rand];
+		if(rand == 1)
+		{
+			document.getElementById("player").play()
+		}
+	}
+}
+
+function reset()
+{
+	document.getElementById("answers").value = "";
+}
+
+
+</script>
+</head>
+<body background = "images/8ballbkgnd.gif">
+<font color = "white">
+<center>
+<h1>Magic 8Ball</h1>
+
+<p>
+<a href="index.html">CLICK HERE</a> to return to my homepage.
+</p>
+
+<h4>Input your question:</h4>
+<input id = "question" type = "text" size = "80" onfocusin = "reset()"/> <br/> <br/>
+<img src = "https://thumbs.gfycat.com/QuestionableMajesticBillygoat-small.gif" width="300"/> <br/> <br/>
+<input type="button" value="Click here" onClick="random()"/> <br/> <br/>
+<h4>Receive an answer:</h4>
+<input id = "answers" type = "text" size = "80" readonly = true/>
+<audio id = "player" src = "sounds/wah8balleffect.mp3"/>
+<br/>
+
+</center>
+</font>
+</body>
+</html>
