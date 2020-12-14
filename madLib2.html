@@ -1,0 +1,81 @@
+<html>
+<head> 
+<script language="JavaScript">
+
+var partsOfSpeech = ["Adjective","Plural Noun","Emotion","Adjective","Number","Emotion","Adjective","Emotion", "Adjective", "Adverb"];
+var answers; 
+var story = ["Once upon a time, there was a very "," dragon. One day, this dragon decided to invade a nearby village, and took all of their ",". The townspeople were very "," about this, so they decided to hunt the "," dragon. Unfortunately for the townspeople, the dragon was much stronger than they had anticipated, so after "," days they had to return home. Although the attack was unsuccessful, it had hurt the dragon and made it "," So the dragon decided it would kidnap the "," princess. The next day, it flew to the town and carried her away. The king was absolutely ", ".  So he sent his royal army to get the princess back. But when the royal army found the princess, she didn’t want to return back home. In reality, the dragon was just lonely and had such ", " social skills that he didn’t know how to make friends, but was really quite kind. The army ", " explained that stealing and kidnapping was probably a bad idea, and the dragon and the princess lived happily ever after."];
+var count = 0;
+var instruct = false
+
+function getWords()
+{
+	var wordBox = document.getElementById("response");
+	partsOfSpeech[count] = wordBox.value;
+	
+	count++;
+	
+	if(count < partsOfSpeech.length)
+	{
+		prompt();
+	}
+	else
+	{
+		count = 0;
+		document.getElementById("story").innerHTML = displayStory();
+	}
+}
+
+function prompt()
+{
+	document.getElementById("userEnter").style.visibility = "visible";
+	document.getElementById("story").style.visibility = "hidden";
+	document.getElementById("response").value = partsOfSpeech[count];
+}
+
+function insert()
+{
+	alert("hello");
+}
+
+function displayStory()
+{
+	var answer = "";
+	var i;
+	
+	for (i = 0; i < partsOfSpeech.length; i++)
+	{
+		answer = answer + story[i] + partsOfSpeech[i];
+		// fill the variable answer with an element of story followed by an element of partsOfSpeech.
+		// traverse both lists until all elements of each list are in answer. 
+		// Alert answer when finished.
+
+	}
+	
+	if (i < story.length)
+	{
+		answer = answer + story[i];
+	}
+	document.getElementById("userEnter").style.visibility = "hidden";
+	document.getElementById("story").style.visibility = "visible";
+	return answer;
+	alert(answer);
+}
+
+</script>
+</head>
+<body>
+<center> 
+<h1>My MadLib!</h1>
+<center><a href="index.html">CLICK HERE</a> to return to my home page.</center>
+<br/>
+<input id="daButton" type="button" value="Click Here to Begin" onClick="prompt()"/>
+</center>
+<div id="userEnter" style="position:absolute; left:580; top: 140; visibility:hidden;">
+<input type = "text" id="response" value="" onfocusout="getWords()"/>
+</div>
+
+<div id="story" style="position:absolute; overflow:scroll; top:220; left:460; width:500; height: 250; visibility:hidden"></div>
+
+</body>
+</html>
