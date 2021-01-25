@@ -1,0 +1,90 @@
+<html> 
+<head> 
+<script language="JavaScript">
+
+/*************** Algorithm ******************
+1. The code will take input from the user
+2. Identify which president was selected
+3. Match the user input with an index number in var group
+4. Match the index in var group to an index number in var facts
+5. Upon "click", the fact will be displayed in the text box
+6. The text box should be uneditable to the user
+7. The text box should clear when the dropdown menu is selected again
+8. The dropdown menu should display the item selected
+
+*/
+
+
+var group = ["-- Choose a bird --", "Peregrine Falcon","American Kestrel", "Bald Eagle", "Red-Tailed Hawk", "Barn Owl", "California Condor"];
+
+var facts = ["-- No bird selected --", "Peregrin Falcons can dive up to 200 miles per hour!","The American Kestrel is the smallest falcon in North America.","Bald Eagle's build the largest nest of any bird in North America.","Red-Tailed Hawks can't move their eyes. They have to turn their head instead.","Barn Owls are often mistaken for Screech Owls, because they make a spooky screeching noise instead of hooting!", "The California Condor is the largest bird in North America, and became extinct in the wild in 1987. Thanks to conservation efforts, there are now more than 300 thriving in the wild today!" ];
+
+function loadData()
+{
+	var sum = 0;
+	for(var i = 0; i<group.length; i++)
+    {
+        var daList = document.getElementById("prez");
+  		var option = document.createElement("option");
+  		option.text = group[i];
+  		daList.add(option);
+    }
+}
+
+// This function identifies which element from the drop down has been selected. It calls the 
+// getIndex function to acquire what the index of the selected item. Then it displays the 
+// corresponding element in the facts list. (This is diplayed in the textbox on the web page.)
+function start()
+{
+	//alert(getIndex("Peregrine Falcon"));
+	var selection = document.getElementById("prez");
+	var daindex = getIndex(selection.value);
+	if(daindex == -1)
+	{
+		alert("An error has occured. Sorry!")
+	}
+	else
+	{
+		document.getElementById("funFact").value = facts[daindex];
+	}
+}
+
+// This function searches the group array for the element passed as a parameter
+// and returns the index number for that element in the array.
+function getIndex(d)
+{
+	var answer = -1;
+	for(var i = 0; i < group.length; i = i+1)
+	{
+		if(group[i] == d)
+		{
+			answer = i
+		}
+	}
+	return answer;
+
+}
+
+
+
+</script>
+</head>
+<body onload="loadData()" background = "images/ffbkgnd.gif"> 
+<center>
+<h1>Birds of Prey - Fun Facts</h1>
+<center><a href="index.html">CLICK HERE</a> to return to my home page!</center>
+
+<br/><br/>
+<table border = 3>
+	<tr>
+		<td>  	<select name="p1" id="prez"></select>	</td>
+		<td>	<input id="funFact" type="text" size="100"/> </td>
+	</tr>
+</table>
+<br/><br/>
+<input type="button" value="click" onclick="start()"/>
+</center>
+
+
+</body>
+</html>
