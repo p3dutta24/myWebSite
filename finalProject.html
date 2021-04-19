@@ -1,0 +1,205 @@
+<html>
+<head> 
+<script language="JavaScript">
+
+/*Option Buttons:
+1. Instructions
+2. Change Background
+3. Reset
+
+*/
+//0291, white, green, red, blue
+// Correct: You press ENTER on the keypad, and the light flashes green! Overjoyed, you run through the door and... into the living room of the Ice Cream Man's apartment? For a moment, he is shocked. Then he collects himself, and apologetically explains that his daughter dropped a small flower pot from his window (above the Ice Cream shop) and it hit you on the head. He felt terribly and brought you upstairs into what was formerly his storage (hence the lock?) to rest until you recovered. Now his daughters' playroom, he and his wife added a few cute clues so that if the door ever locked, they could always get out and even make a game of it. You found it a little strange, but the Ice Cream Man gives you some ice cream for your headache and sends you on your way. So you weren't kidnapped, and you even got free ice cream! Excellent!
+var directions = ["Welcome to Escape the Room! The rules of the game are simple: look around and gather clues to figure out the 4 digit code that will unlock the door. Click 'Backstory' to learn how you came to be in this bizarre situation. If necessary, you can click 'Reset' to reset the game, but you'd have to mess up really badly for that to become necessary. The puzzle itself is extremely simple, so I don't anticipate you'll need any hints. If you do, ask a friend. If you'd like to view this message again, click 'Instructions.' And lastly, you can look around as many times as you need, so happy escaping!","You look up. There is nothing on the ceiling except for a light, which seems strange, because the room is already lit up. Either way, you reach for the pull cord and give it a tug. You blink in surprise when it lights up blue. In the center, a strange shape is blocked from the light by an object within the bulb, casting a shadow in the shape of a 1. Half-blind, you reach up and turn off the light. Blue light is one more stress you don't need right now.","You look down. The floor is made of dark wooden planks and covered by a colorful rug. Carefully, you step back and lift it up. Unfortunately (or perhaps for the better), there is no secret trapdoor. There is a number 9, however, scrawled in red. Huh, creepy. You set the carpet back down.","You look to the right and see a cozy looking fireplace and a rocking chair. Hung on the wall is a neatly framed picture, depicting a (from left to right) a white square, a green square, a red square, and a blue square. You don't know what it means, but it seems important. On the rocking chair, there's a small green pillow with an embroidered number 2.","You look to the left and see an office, of some sort. There is a tall bookshelf next to a large desk. There are some papers scattered across, but the only thing on them are bad drawings of cartoon animals. You turn your attention to the bookshelf, which are mostly filled with books. You check the books, but they are all pictures books about giraffes. This makes you wonder slightly about the owner of this office, but the other thing you notice is that all the bookends are white ovals--almost like a 0. You open desk drawers just to check, but they are empty.","The keypad flashes red, and the door handle does not budge. The code was incorrect.","You press ENTER on the keypad, and the light flashes green! Overjoyed, you run through the door and... into the living room of the Ice Cream Man's apartment? For a moment, he is shocked. Then he collects himself, and apologetically explains that his daughter dropped a small flower pot from his window (above the Ice Cream shop) and it hit you on the head. He felt terribly and brought you upstairs into what was formerly his ice cream vault (hence the lock?) to rest until you recovered. Now his daughters' playroom, he and his wife added a few cute clues so that if the door ever locked, they could always get out and even make a game of it. You found it a little strange, but the Ice Cream Man gives you some ice cream for your headache and sends you on your way. So you weren't kidnapped, and you even got free ice cream! Excellent!","You were walking to the ice cream store to buy a milkshake when something hit you on the head and knocked you out. Sometime later, you wake up with a throbbing headache in an unfamiliar room. Fearing you've been kidnapped, you try to leave through the door but find it's locked. You notice a keypad on the door. If you can figure out the combination, maybe you can ecsape!"]
+var decide = 0
+
+//begin game
+function go()
+{
+	var gl = "Good Luck!";
+	decide = 0;
+	fill(decide);
+	document.getElementById("story").innerHTML = fill(decide);
+	document.getElementById("sprite").src = "images/Forward.png";
+	
+	//document.getElementById("begin").style.visibility = "hidden";
+	document.getElementById("yes").innerHTML = gl;
+	
+	document.getElementById("exit").style.visibility = "visible";
+}
+
+//---------------------------------
+var enterState = false
+
+function init()
+{
+	document.onkeydown=keyListener;
+}
+
+function keyListener()
+{
+	if(enterState == true)
+	{
+		if(window.event.keyCode==13)//enter key
+		{
+			userInput();
+		}
+	}
+}
+
+function gotFocus()
+{
+	enterState = true;
+}
+
+function lostFocus()
+{
+	enterState = false;
+}
+//-------------------------------
+
+function reset()
+{
+	var t = ""
+	var x = "Really?"
+	document.getElementById("story").innerHTML = t;
+	document.getElementById("sprite").src = "images/Forward.png";
+	
+	document.getElementById("yes").innerHTML = x;
+}
+
+function creative()
+{
+	decide = 7;
+	fill(decide);
+	document.getElementById("story").innerHTML = fill(decide);
+	document.getElementById("sprite").src = "images/Forward.png";
+}
+
+function fill(decide)
+{
+	text = directions[decide];
+	return text;
+}
+
+//buttons
+
+function clickRight()
+{
+	document.getElementById("sprite").src = "images/Right.png";
+	decide = 3
+	fill(decide);
+	document.getElementById("story").innerHTML = fill(decide);
+}
+function clickLeft()
+{
+	document.getElementById("sprite").src = "images/Left.png";
+	decide = 4
+	fill(decide);
+	document.getElementById("story").innerHTML = fill(decide);
+}
+function clickUp()
+{
+	document.getElementById("sprite").src = "images/Up.png";
+	decide = 1
+	fill(decide);
+	document.getElementById("story").innerHTML = fill(decide);
+}
+function clickDown()
+{
+	document.getElementById("sprite").src = "images/Down.png";
+	decide = 2
+	fill(decide);
+	document.getElementById("story").innerHTML = fill(decide);
+}
+
+function userInput()
+{
+	var uCode = document.getElementById("keypad").value;
+	if(uCode == "0291")
+	{
+		decide = 6;
+		var c = "Congratulations!";
+		var a = "Correct! You escaped!";
+		document.getElementById("yes").innerHTML = c;
+		document.getElementById("exit").innerHTML = a;
+		
+	}
+	else
+	{
+		decide = 5;
+	}
+	//alert(decide);
+	//fill(decide);
+	fill(decide);
+	document.getElementById("story").innerHTML = fill(decide);
+	document.getElementById("keypad").value = "";
+}
+
+
+</script>
+</head>
+<body background = "images/ptbkgnd1.gif" onload = "init()">
+<center> 
+
+<h1> Escape the Room! </h1>
+
+<div style="position:absolute; left:220; top:80;">
+<input id="up" type="button" value="Look Up" onClick="clickUp()"/>
+</div>
+
+<div style="position:absolute; left:212; top:240;">
+<input id="down" type="button" value="Look Down" onClick="clickDown()"/>
+</div>
+
+<div style="position:absolute; left:318; top:160;">
+<input id="right" type="button" value="Look Right" onClick="clickRight()"/>
+</div>
+
+<div style="position:absolute; left:106; top:160;">
+<input id="left" type="button" value="Look Left" onClick="clickLeft()"/>
+</div>
+
+
+<div style="position:absolute; left:950; top:80">
+Game Options:
+</div>
+
+<div style="position:absolute; left:1030; top:120">
+<input id="instructions" type="button" value="Instructions" onClick="go()"/>
+</div>
+
+<div style="position:absolute; left:1110; top:180">
+<input id="background" type= "button" value = "Backstory" onClick ="creative()"/>
+</div>
+
+<div style="position:absolute; left:1190; top:240">
+<input id="reset" type="button" value= "Reset Game" onClick="reset()"/>
+</div>
+
+
+<div>
+<img id = "sprite" src = "images/Forward.png" width="270"/>
+</div>
+
+<div id="story" style="position:absolute; overflow:scroll; top:340; left:106; width:500; height: 250; visibility:visible; border:thin solid #000000"> </div>
+
+<div id = "yes" style="position:absolute; left:640; top:450">
+<input id="begin" type="button" value= "Click to Begin" onClick="go()"/>
+</div>
+
+<div id="exit" style="position:absolute; top:340; left:760; width:500; height:250; visibility:visible; border:thin solid">
+<center>
+<br/>
+<h3> Exit Door </h3>
+<br/> 
+<input id="keypad" type="text" size="4" onFocusIn= "gotFocus()" onFocusOut="lostFocus()"/>
+<br/><br/>
+<h4> Open the door by inputting the correct code. </h4>
+</center>
+</div>
+
+
+</center>
+</body>
+</html>
